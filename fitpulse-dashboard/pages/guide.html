@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitPulse — Setup Guide</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo"><i class="ti ti-heart-rate"></i><span>FitPulse</span></div>
+    <ul class="nav-links">
+      <li><a href="../index.html"><i class="ti ti-dashboard"></i> Dashboard</a></li>
+      <li class="active"><a href="guide.html"><i class="ti ti-list-check"></i> Setup Guide</a></li>
+      <li><a href="workout.html"><i class="ti ti-barbell"></i> Workouts</a></li>
+      <li><a href="nutrition.html"><i class="ti ti-salad"></i> Nutrition</a></li>
+    </ul>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <span id="userNameDisplay">Set up profile</span>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <h1>Setup guide</h1>
+    <p class="page-sub">Follow the 4 steps to personalise your FitPulse experience.</p>
+
+    <div class="progress-bar-top"><div class="progress-bar-top-fill" id="topProgress" style="width:25%;"></div></div>
+
+    <div class="stepper">
+      <div class="step-item">
+        <div class="step-circle active" id="sc0" onclick="goStep(0)">1</div>
+        <span class="step-label active" id="sl0">Onboarding</span>
+      </div>
+      <div class="step-connector" id="con0"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc1" onclick="goStep(1)">2</div>
+        <span class="step-label" id="sl1">Workout</span>
+      </div>
+      <div class="step-connector" id="con1"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc2" onclick="goStep(2)">3</div>
+        <span class="step-label" id="sl2">Dashboard</span>
+      </div>
+      <div class="step-connector" id="con2"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc3" onclick="goStep(3)">4</div>
+        <span class="step-label" id="sl3">Nutrition</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: ONBOARDING -->
+    <div class="panel active" id="panel0">
+      <p class="panel-title">Welcome to FitPulse</p>
+      <p class="panel-desc">Let's set up your profile so we can personalise your dashboard.</p>
+
+      <div class="field-group">
+        <label class="field-label">Your name</label>
+        <input type="text" id="userName" placeholder="e.g. Alex Johnson" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Fitness level</label>
+        <select id="fitnessLevel">
+          <option value="beginner">Beginner — just getting started</option>
+          <option value="intermediate">Intermediate — workout 2–3x/week</option>
+          <option value="advanced">Advanced — workout 5+x/week</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Primary goal</label>
+        <div class="goal-grid">
+          <div class="goal-btn selected" data-goal="lose_weight" onclick="selectGoal(this)">
+            <div class="gb-icon"><i class="ti ti-flame"></i></div>
+            <div class="gb-name">Lose weight</div>
+            <div class="gb-desc">Burn fat, feel lighter</div>
+          </div>
+          <div class="goal-btn" data-goal="build_muscle" onclick="selectGoal(this)">
+            <div class="gb-icon"><i class="ti ti-barbell"></i></div>
+            <div class="gb-name">Build muscle</div>
+            <div class="gb-desc">Strength &amp; size gains</div>
+          </div>
+          <div class="goal-btn" data-goal="endurance" onclick="selectGoal(this)">
+            <div class="gb-icon"><i class="ti ti-run"></i></div>
+            <div class="gb-name">Endurance</div>
+            <div class="gb-desc">Run longer, go further</div>
+          </div>
+          <div class="goal-btn" data-goal="health" onclick="selectGoal(this)">
+            <div class="gb-icon"><i class="ti ti-heart"></i></div>
+            <div class="gb-name">Stay healthy</div>
+            <div class="gb-desc">Overall wellness</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <span style="font-size:13px;color:var(--text-muted);">Step 1 of 4</span>
+        <button class="btn-primary" onclick="saveStep0()">Next — Workout builder <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 2: WORKOUT BUILDER -->
+    <div class="panel" id="panel1">
+      <p class="panel-title">Workout builder</p>
+      <p class="panel-desc">Choose your exercises and schedule your weekly sessions.</p>
+
+      <div class="field-group">
+        <label class="field-label">Pick your exercises</label>
+        <div class="exercise-list">
+          <div class="exercise-item selected" onclick="toggleExercise(this)" data-ex="running">
+            <div class="check-circle"><i class="ti ti-check"></i></div>
+            <i class="ti ti-run" style="color:#1D9E75;font-size:18px;"></i>
+            <span class="ei-name">Running</span>
+            <span class="ei-meta">Cardio · 400–600 kcal/hr</span>
+          </div>
+          <div class="exercise-item selected" onclick="toggleExercise(this)" data-ex="weights">
+            <div class="check-circle"><i class="ti ti-check"></i></div>
+            <i class="ti ti-barbell" style="color:#378ADD;font-size:18px;"></i>
+            <span class="ei-name">Weight training</span>
+            <span class="ei-meta">Strength · 200–400 kcal/hr</span>
+          </div>
+          <div class="exercise-item" onclick="toggleExercise(this)" data-ex="swimming">
+            <div class="check-circle"><i class="ti ti-check"></i></div>
+            <i class="ti ti-swimming" style="color:#7F77DD;font-size:18px;"></i>
+            <span class="ei-name">Swimming</span>
+            <span class="ei-meta">Full body · 500–700 kcal/hr</span>
+          </div>
+          <div class="exercise-item" onclick="toggleExercise(this)" data-ex="cycling">
+            <div class="check-circle"><i class="ti ti-check"></i></div>
+            <i class="ti ti-bike" style="color:#EF9F27;font-size:18px;"></i>
+            <span class="ei-name">Cycling</span>
+            <span class="ei-meta">Cardio · 450–650 kcal/hr</span>
+          </div>
+          <div class="exercise-item" onclick="toggleExercise(this)" data-ex="yoga">
+            <div class="check-circle"><i class="ti ti-check"></i></div>
+            <i class="ti ti-yoga" style="color:#D4537E;font-size:18px;"></i>
+            <span class="ei-name">Yoga</span>
+            <span class="ei-meta">Flexibility · 150–300 kcal/hr</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top:1.25rem;">
+        <label class="field-label">Workout days</label>
+        <div class="day-grid">
+          <div class="day-btn selected" onclick="toggleDay(this)" data-day="mon">Mon</div>
+          <div class="day-btn" onclick="toggleDay(this)" data-day="tue">Tue</div>
+          <div class="day-btn selected" onclick="toggleDay(this)" data-day="wed">Wed</div>
+          <div class="day-btn" onclick="toggleDay(this)" data-day="thu">Thu</div>
+          <div class="day-btn selected" onclick="toggleDay(this)" data-day="fri">Fri</div>
+          <div class="day-btn" onclick="toggleDay(this)" data-day="sat">Sat</div>
+          <div class="day-btn" onclick="toggleDay(this)" data-day="sun">Sun</div>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top:1.25rem;">
+        <label class="field-label">Session duration: <strong id="durOut">45 min</strong></label>
+        <input type="range" min="15" max="120" step="15" value="45"
+          oninput="document.getElementById('durOut').textContent = this.value + ' min'" />
+      </div>
+
+      <div class="nav-row">
+        <button onclick="prevStep()"><i class="ti ti-arrow-left"></i> Back</button>
+        <button class="btn-primary" onclick="saveStep1()">Next — Dashboard tour <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 3: DASHBOARD FEATURES -->
+    <div class="panel" id="panel2">
+      <p class="panel-title">Dashboard features</p>
+      <p class="panel-desc">Here's what each section of your FitPulse dashboard does.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="fc-icon"><i class="ti ti-chart-bar" style="color:#1D9E75;"></i></div>
+          <div class="fc-title">Metric cards</div>
+          <div class="fc-desc">At-a-glance summary of calories, workouts, distance, and sleep — updated weekly.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon"><i class="ti ti-flame" style="color:#D85A30;"></i></div>
+          <div class="fc-title">Calories chart</div>
+          <div class="fc-desc">Daily burn vs your goal as a bar chart. Bars turn teal when you hit the target.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon"><i class="ti ti-heart-rate" style="color:#D4537E;"></i></div>
+          <div class="fc-title">Heart rate zones</div>
+          <div class="fc-desc">Donut showing time split across Rest, Fat Burn, Cardio, and Peak zones.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon"><i class="ti ti-moon" style="color:#7F77DD;"></i></div>
+          <div class="fc-title">Sleep tracker</div>
+          <div class="fc-desc">Nightly sleep hours as a line chart — spot patterns and dips at a glance.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon"><i class="ti ti-run" style="color:#378ADD;"></i></div>
+          <div class="fc-title">Activity breakdown</div>
+          <div class="fc-desc">Progress bars per activity showing how close you are to weekly targets.</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon"><i class="ti ti-calendar" style="color:#EF9F27;"></i></div>
+          <div class="fc-title">Week navigation</div>
+          <div class="fc-desc">Use the arrows at the top to switch between weeks and review past performance.</div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button onclick="prevStep()"><i class="ti ti-arrow-left"></i> Back</button>
+        <button class="btn-primary" onclick="nextStep()">Next — Nutrition plan <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 4: NUTRITION -->
+    <div class="panel" id="panel3">
+      <p class="panel-title">Nutrition &amp; meal planning</p>
+      <p class="panel-desc">Set your daily calorie target and see your macro split.</p>
+
+      <div class="field-group">
+        <label class="field-label">Daily calorie target: <strong id="calOut">1,850 kcal</strong></label>
+        <input type="range" min="1200" max="3500" step="50" value="1850" id="calSlider"
+          oninput="updateNutrition(this.value)" />
+      </div>
+
+      <div class="macro-grid">
+        <div class="macro-card">
+          <div class="macro-val" id="protVal">139g</div>
+          <div class="macro-label">Protein (30%)</div>
+          <div class="macro-bar" style="background:#1D9E75;"></div>
+        </div>
+        <div class="macro-card">
+          <div class="macro-val" id="carbVal">231g</div>
+          <div class="macro-label">Carbs (50%)</div>
+          <div class="macro-bar" style="background:#378ADD;"></div>
+        </div>
+        <div class="macro-card">
+          <div class="macro-val" id="fatVal">62g</div>
+          <div class="macro-label">Fat (20%)</div>
+          <div class="macro-bar" style="background:#EF9F27;"></div>
+        </div>
+      </div>
+
+      <label class="field-label" style="margin-bottom:10px;">Sample meal plan</label>
+      <div class="meal-list">
+        <div class="meal-row"><div class="meal-dot" style="background:#1D9E75;"></div><span class="meal-name">Breakfast — oats, banana, almond butter</span><span class="meal-cal" id="m1">420 kcal</span></div>
+        <div class="meal-row"><div class="meal-dot" style="background:#378ADD;"></div><span class="meal-name">Lunch — grilled chicken, quinoa, salad</span><span class="meal-cal" id="m2">550 kcal</span></div>
+        <div class="meal-row"><div class="meal-dot" style="background:#EF9F27;"></div><span class="meal-name">Snack — Greek yoghurt, berries</span><span class="meal-cal" id="m3">180 kcal</span></div>
+        <div class="meal-row"><div class="meal-dot" style="background:#D85A30;"></div><span class="meal-name">Dinner — salmon, sweet potato, veg</span><span class="meal-cal" id="m4">620 kcal</span></div>
+      </div>
+
+      <div class="nav-row">
+        <button onclick="prevStep()"><i class="ti ti-arrow-left"></i> Back</button>
+        <button class="btn-primary" onclick="finishSetup()"><i class="ti ti-check"></i> Finish &amp; go to dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/guide.js"></script>
+</body>
+</html>

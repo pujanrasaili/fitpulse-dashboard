@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitPulse — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo">
+      <i class="ti ti-heart-rate"></i>
+      <span>FitPulse</span>
+    </div>
+    <ul class="nav-links">
+      <li class="active"><a href="index.html"><i class="ti ti-dashboard"></i> Dashboard</a></li>
+      <li><a href="pages/guide.html"><i class="ti ti-list-check"></i> Setup Guide</a></li>
+      <li><a href="pages/workout.html"><i class="ti ti-barbell"></i> Workouts</a></li>
+      <li><a href="pages/nutrition.html"><i class="ti ti-salad"></i> Nutrition</a></li>
+    </ul>
+    <div class="sidebar-user" id="sidebarUser">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <span id="userNameDisplay">Set up profile</span>
+    </div>
+  </nav>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="welcomeMsg">Good morning!</h1>
+        <p class="topbar-sub" id="weekLabel">Week of May 12 – 18, 2026</p>
+      </div>
+      <div class="week-nav">
+        <button id="prevWeek"><i class="ti ti-chevron-left"></i></button>
+        <span id="weekDisplay">This week</span>
+        <button id="nextWeek"><i class="ti ti-chevron-right"></i></button>
+      </div>
+    </header>
+
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label"><i class="ti ti-flame" style="color:#D85A30;"></i> Calories burned</div>
+        <div class="metric-val" id="mCal">12,840</div>
+        <div class="metric-trend trend-up"><i class="ti ti-trending-up"></i> +8% vs last week</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label"><i class="ti ti-run" style="color:#1D9E75;"></i> Workouts</div>
+        <div class="metric-val" id="mWorkouts">6</div>
+        <div class="metric-trend trend-up"><i class="ti ti-trending-up"></i> +1 vs last week</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label"><i class="ti ti-road" style="color:#378ADD;"></i> Distance (km)</div>
+        <div class="metric-val" id="mDist">38.4</div>
+        <div class="metric-trend trend-down"><i class="ti ti-trending-down"></i> −3% vs last week</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label"><i class="ti ti-moon" style="color:#7F77DD;"></i> Avg sleep (hrs)</div>
+        <div class="metric-val" id="mSleep">7.2</div>
+        <div class="metric-trend trend-up"><i class="ti ti-trending-up"></i> +0.4 vs last week</div>
+      </div>
+    </section>
+
+    <section class="charts-grid">
+      <div class="chart-card wide">
+        <div class="chart-header">
+          <span class="chart-title">Daily calories burned</span>
+          <div class="chart-legend">
+            <span><span class="dot" style="background:#1D9E75;"></span>Calories</span>
+            <span><span class="dot dashed" style="background:#D85A30;"></span>Goal</span>
+          </div>
+        </div>
+        <canvas id="calChart" height="80"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header"><span class="chart-title">Heart rate zones</span></div>
+        <canvas id="hrChart" height="160"></canvas>
+        <div class="chart-legend" style="margin-top:12px;">
+          <span><span class="dot" style="background:#85B7EB;"></span>Rest 30%</span>
+          <span><span class="dot" style="background:#1D9E75;"></span>Fat burn 25%</span>
+          <span><span class="dot" style="background:#EF9F27;"></span>Cardio 30%</span>
+          <span><span class="dot" style="background:#D85A30;"></span>Peak 15%</span>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header"><span class="chart-title">Sleep quality (hrs)</span></div>
+        <canvas id="sleepChart" height="160"></canvas>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Activity breakdown</h2>
+      <div class="activity-grid" id="activityGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

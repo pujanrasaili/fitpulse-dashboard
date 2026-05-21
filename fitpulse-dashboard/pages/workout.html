@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitPulse — Workouts</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo"><i class="ti ti-heart-rate"></i><span>FitPulse</span></div>
+    <ul class="nav-links">
+      <li><a href="../index.html"><i class="ti ti-dashboard"></i> Dashboard</a></li>
+      <li><a href="guide.html"><i class="ti ti-list-check"></i> Setup Guide</a></li>
+      <li class="active"><a href="workout.html"><i class="ti ti-barbell"></i> Workouts</a></li>
+      <li><a href="nutrition.html"><i class="ti ti-salad"></i> Nutrition</a></li>
+    </ul>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <span id="userNameDisplay">Set up profile</span>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <h1>Workouts</h1>
+    <p class="page-sub">Log sessions and track your weekly schedule.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;" id="workoutSummary">
+      <!-- filled by JS -->
+    </div>
+
+    <h2 class="section-title" style="margin-bottom:12px;">This week's schedule</h2>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:2rem;" id="scheduleGrid">
+      <!-- filled by JS -->
+    </div>
+
+    <h2 class="section-title" style="margin-bottom:12px;">Log a session</h2>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="field-group" style="margin:0;">
+          <label class="field-label">Exercise type</label>
+          <select id="logType">
+            <option>Running</option><option>Weight training</option>
+            <option>Swimming</option><option>Cycling</option><option>Yoga</option>
+          </select>
+        </div>
+        <div class="field-group" style="margin:0;">
+          <label class="field-label">Duration (min)</label>
+          <input type="number" id="logDur" value="45" min="5" max="300" />
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;">
+        <div class="field-group" style="margin:0;">
+          <label class="field-label">Distance (km, optional)</label>
+          <input type="number" id="logDist" value="" placeholder="e.g. 5" step="0.1" />
+        </div>
+        <div class="field-group" style="margin:0;">
+          <label class="field-label">Date</label>
+          <input type="date" id="logDate" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;" />
+        </div>
+      </div>
+      <button class="btn-primary" onclick="logSession()"><i class="ti ti-plus"></i> Log session</button>
+    </div>
+
+    <h2 class="section-title" style="margin:1.5rem 0 12px;">Recent sessions</h2>
+    <div id="sessionList"><!-- filled by JS --></div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script>
+    const DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const today = new Date();
+    document.getElementById('logDate').valueAsDate = today;
+
+    function renderSummary() {
+      const sessions = Store.get('sessions') || [];
+      const thisWeek = sessions.filter(s => {
+        const d = new Date(s.date);
+        const diff = (today - d) / 86400000;
+        return diff >= 0 && diff <= 7;
+      });
+      const totalCal = thisWeek.reduce((a,s) => a + (s.dur * 8), 0);
+      const totalDist = thisWeek.reduce((a,s) => a + (s.dist || 0), 0);
+      document.getElementById('workoutSummary').innerHTML = `
+        <div class="metric-card">
+          <div class="metric-label"><i class="ti ti-run" style="color:#1D9E75;"></i> Sessions this week</div>
+          <div class="metric-val">${thisWeek.length}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label"><i class="ti ti-flame" style="color:#D85A30;"></i> Est. kcal burned</div>
+          <div class="metric-val">${totalCal.toLocaleString()}</div>
+        </div>
+      `;
+    }
+
+    function renderSchedule() {
+      const workout = Store.get('workout');
+      const activeDays = workout?.days || ['mon','wed','fri'];
+      const grid = document.getElementById('scheduleGrid');
+      const dayMap = ['sun','mon','tue','wed','thu','fri','sat'];
+      grid.innerHTML = DAYS_SHORT.map((d, i) => {
+        const key = dayMap[i];
+        const isToday = i === today.getDay();
+        const active = activeDays.includes(key);
+        return `<div style="
+          background:${active ? 'var(--teal-light)' : 'var(--surface)'};
+          border:1px solid ${active ? 'var(--teal)' : 'var(--border)'};
+          border-radius:var(--radius-sm);padding:10px 8px;text-align:center;
+          ${isToday ? 'box-shadow:0 0 0 2px var(--teal);' : ''}
+        ">
+          <div style="font-size:12px;font-weight:600;color:${active ? 'var(--teal-dark)' : 'var(--text-muted)'};">${d}</div>
+          ${active ? '<i class="ti ti-check" style="font-size:14px;color:var(--teal);margin-top:4px;display:block;"></i>' : '<div style="height:18px;margin-top:4px;"></div>'}
+        </div>`;
+      }).join('');
+    }
+
+    function renderSessions() {
+      const sessions = (Store.get('sessions') || []).slice().reverse().slice(0, 10);
+      const icons = { Running:'ti-run', 'Weight training':'ti-barbell', Swimming:'ti-swimming', Cycling:'ti-bike', Yoga:'ti-yoga' };
+      const colors = { Running:'#1D9E75', 'Weight training':'#378ADD', Swimming:'#7F77DD', Cycling:'#EF9F27', Yoga:'#D4537E' };
+      const el = document.getElementById('sessionList');
+      if (!sessions.length) {
+        el.innerHTML = '<p style="color:var(--text-muted);font-size:13px;">No sessions logged yet. Use the form above to add your first one!</p>';
+        return;
+      }
+      el.innerHTML = sessions.map(s => `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;">
+          <i class="ti ${icons[s.type]||'ti-run'}" style="color:${colors[s.type]||'#1D9E75'};font-size:20px;"></i>
+          <div style="flex:1;">
+            <div style="font-size:13.5px;font-weight:600;">${s.type}</div>
+            <div style="font-size:12px;color:var(--text-muted);">${s.date} · ${s.dur} min${s.dist ? ' · ' + s.dist + ' km' : ''}</div>
+          </div>
+          <div style="font-size:13px;color:var(--text-muted);">${Math.round(s.dur * 8)} kcal</div>
+        </div>
+      `).join('');
+    }
+
+    function logSession() {
+      const type = document.getElementById('logType').value;
+      const dur = parseInt(document.getElementById('logDur').value);
+      const dist = parseFloat(document.getElementById('logDist').value) || null;
+      const date = document.getElementById('logDate').value;
+      if (!dur || !date) return alert('Please fill in duration and date.');
+      const sessions = Store.get('sessions') || [];
+      sessions.push({ type, dur, dist, date });
+      Store.set('sessions', sessions);
+      renderSummary(); renderSessions();
+      document.getElementById('logDist').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSummary(); renderSchedule(); renderSessions();
+    });
+  </script>
+</body>
+</html>
