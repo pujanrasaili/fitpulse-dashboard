@@ -6,6 +6,9 @@
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=chartdotjs&logoColor=white)
+![Live](https://img.shields.io/badge/Live-GitHub%20Pages-1D9E75?style=flat&logo=github)
+
+🌐 **Live demo:** [pujanrasaili.github.io/fitpulse-dashboard](https://pujanrasaili.github.io/fitpulse-dashboard/)
 
 ---
 
@@ -16,6 +19,7 @@
 - **Setup guide** — 4-step onboarding: profile → workout builder → dashboard tour → nutrition plan
 - **Workout logger** — log sessions, view your weekly schedule, track estimated calories burned
 - **Nutrition tracker** — log meals, set calorie targets, auto-calculated macro split
+- **🌙 Dark mode** — toggle between light and dark theme, preference saved automatically
 - **Persistent storage** — all data saved to localStorage, no backend needed
 - **Responsive** — works on desktop and mobile
 
@@ -26,10 +30,12 @@
 ```
 fitpulse-dashboard/
 ├── index.html              ← Main dashboard
+├── .nojekyll               ← GitHub Pages fix
 ├── css/
-│   └── style.css           ← All styles
+│   └── style.css           ← All styles + dark mode variables
 ├── js/
 │   ├── storage.js          ← localStorage helper
+│   ├── theme.js            ← Dark mode toggle (runs on all pages)
 │   ├── dashboard.js        ← Charts, week navigation, metrics
 │   └── guide.js            ← Setup guide logic
 └── pages/
@@ -42,7 +48,7 @@ fitpulse-dashboard/
 
 ## 🚀 Getting Started
 
-### Option 1 — Live Server (recommended)
+### Option 1 — Live Server (recommended for development)
 
 1. Open the folder in [VS Code](https://code.visualstudio.com/)
 2. Install the **Live Server** extension by Ritwick Dey
@@ -51,7 +57,7 @@ fitpulse-dashboard/
 
 ### Option 2 — Just open in browser
 
-Double-click `index.html` — it works without any server.
+Double-click `index.html` — works without any server.
 
 ---
 
@@ -62,7 +68,14 @@ Double-click `index.html` — it works without any server.
 | [Chart.js](https://www.chartjs.org/) | Interactive charts |
 | [Tabler Icons](https://tabler-icons.io/) | Icon set |
 | localStorage API | Data persistence |
+| CSS custom properties | Light/dark theming |
 | Vanilla JS | No frameworks, no build step |
+
+---
+
+## 🌙 Dark Mode
+
+Dark mode is implemented using CSS custom properties. Toggle it with the button in the top bar — your preference is saved automatically across all pages and sessions.
 
 ---
 
@@ -77,6 +90,7 @@ All data is saved in your browser's **localStorage** — nothing leaves your dev
 | `fitpulse_nutrition` | Calorie target & macros |
 | `fitpulse_sessions` | Logged workout sessions |
 | `fitpulse_meals` | Logged meals |
+| `fitpulse_theme` | Light or dark mode preference |
 
 **To reset all data**, open the browser console and run:
 ```js
@@ -100,11 +114,14 @@ Object.keys(localStorage)
 
 ## 🔮 Roadmap
 
-- [ ] Dark mode toggle
+- [x] Interactive charts & week navigation
+- [x] 4-step setup guide
+- [x] Workout & nutrition logger
+- [x] Dark mode toggle
+- [x] Deployed on GitHub Pages
 - [ ] Export weekly summary as PDF
 - [ ] Progressive Web App (installable on mobile)
 - [ ] Strava / Apple Health integration
-- [ ] Drill-down on chart clicks
 - [ ] Streak tracking & badges
 
 ---
@@ -113,6 +130,7 @@ Object.keys(localStorage)
 
 **Pujan Rasaili**
 - GitHub: [@pujanrasaili](https://github.com/pujanrasaili)
+- Live project: [pujanrasaili.github.io/fitpulse-dashboard](https://pujanrasaili.github.io/fitpulse-dashboard/)
 
 ---
 

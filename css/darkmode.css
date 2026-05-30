@@ -11,29 +11,31 @@
   --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
 }
 
+/* Smooth transition */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.1s ease;
+}
+
 /* Toggle button */
 .theme-toggle {
   background: none;
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 13px;
   color: var(--text-muted);
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .theme-toggle:hover {
   background: var(--bg);
   color: var(--text);
+  border-color: var(--teal);
 }
 .theme-toggle .ti {
-  font-size: 16px;
-}
-
-/* Smooth transition on theme switch */
-*, *::before, *::after {
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.1s ease;
+  font-size: 15px;
 }

@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FitPulse — Dashboard</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/darkmode.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <script src="js/theme.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -21,7 +23,7 @@
       <li><a href="pages/workout.html"><i class="ti ti-barbell"></i> Workouts</a></li>
       <li><a href="pages/nutrition.html"><i class="ti ti-salad"></i> Nutrition</a></li>
     </ul>
-    <div class="sidebar-user" id="sidebarUser">
+    <div class="sidebar-user">
       <div class="user-avatar" id="userAvatar">?</div>
       <span id="userNameDisplay">Set up profile</span>
     </div>
@@ -33,10 +35,15 @@
         <h1 id="welcomeMsg">Good morning!</h1>
         <p class="topbar-sub" id="weekLabel">Week of May 12 – 18, 2026</p>
       </div>
-      <div class="week-nav">
-        <button id="prevWeek"><i class="ti ti-chevron-left"></i></button>
-        <span id="weekDisplay">This week</span>
-        <button id="nextWeek"><i class="ti ti-chevron-right"></i></button>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="week-nav">
+          <button id="prevWeek"><i class="ti ti-chevron-left"></i></button>
+          <span id="weekDisplay">This week</span>
+          <button id="nextWeek"><i class="ti ti-chevron-right"></i></button>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="ti ti-moon"></i> Dark mode
+        </button>
       </div>
     </header>
 
@@ -69,7 +76,7 @@
           <span class="chart-title">Daily calories burned</span>
           <div class="chart-legend">
             <span><span class="dot" style="background:#1D9E75;"></span>Calories</span>
-            <span><span class="dot dashed" style="background:#D85A30;"></span>Goal</span>
+            <span><span class="dot" style="background:#D85A30;"></span>Goal</span>
           </div>
         </div>
         <canvas id="calChart" height="80"></canvas>
@@ -92,9 +99,7 @@
 
     <section>
       <h2 class="section-title">Activity breakdown</h2>
-      <div class="activity-grid" id="activityGrid">
-        <!-- Populated by JS -->
-      </div>
+      <div class="activity-grid" id="activityGrid"></div>
     </section>
   </main>
 
