@@ -1,4 +1,4 @@
-# 🏃 FitPulse Dashboard
+# FitPulse Dashboard
 
 > A sleek fitness & health analytics dashboard — track workouts, calories, sleep, and progress over time with beautiful interactive charts.
 
@@ -8,24 +8,24 @@
 ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=chartdotjs&logoColor=white)
 ![Live](https://img.shields.io/badge/Live-GitHub%20Pages-1D9E75?style=flat&logo=github)
 
-🌐 **Live demo:** [pujanrasaili.github.io/fitpulse-dashboard](https://pujanrasaili.github.io/fitpulse-dashboard/)
+**Live demo:** [pujanrasaili.github.io/fitpulse-dashboard](https://pujanrasaili.github.io/fitpulse-dashboard/)
 
 ---
 
-## ✨ Features
+## Features
 
 - **Dashboard** — weekly metrics (calories, workouts, distance, sleep) with week-by-week navigation
 - **Interactive charts** — daily calories bar chart, heart rate zones donut, sleep quality line chart
 - **Setup guide** — 4-step onboarding: profile → workout builder → dashboard tour → nutrition plan
 - **Workout logger** — log sessions, view your weekly schedule, track estimated calories burned
 - **Nutrition tracker** — log meals, set calorie targets, auto-calculated macro split
-- **🌙 Dark mode** — toggle between light and dark theme, preference saved automatically
+- **Dark mode** — toggle between light and dark theme, preference saved automatically
 - **Persistent storage** — all data saved to localStorage, no backend needed
 - **Responsive** — works on desktop and mobile
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 fitpulse-dashboard/
@@ -46,7 +46,7 @@ fitpulse-dashboard/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Option 1 — Live Server (recommended for development)
 
@@ -61,7 +61,7 @@ Double-click `index.html` — works without any server.
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 | Tool | Purpose |
 |------|---------|
@@ -73,13 +73,13 @@ Double-click `index.html` — works without any server.
 
 ---
 
-## 🌙 Dark Mode
+## Dark Mode
 
 Dark mode is implemented using CSS custom properties. Toggle it with the button in the top bar — your preference is saved automatically across all pages and sessions.
 
 ---
 
-## 📦 Data Storage
+## Data Storage
 
 All data is saved in your browser's **localStorage** — nothing leaves your device.
 
@@ -101,7 +101,7 @@ Object.keys(localStorage)
 
 ---
 
-## 🗺️ Pages
+## Pages
 
 | Page | File | Description |
 |------|------|-------------|
@@ -112,7 +112,7 @@ Object.keys(localStorage)
 
 ---
 
-## 🔮 Roadmap
+## Roadmap
 
 - [x] Interactive charts & week navigation
 - [x] 4-step setup guide
@@ -126,7 +126,7 @@ Object.keys(localStorage)
 
 ---
 
-## 👤 Author
+## Author
 
 **Pujan Rasaili**
 - GitHub: [@pujanrasaili](https://github.com/pujanrasaili)
@@ -134,6 +134,6 @@ Object.keys(localStorage)
 
 ---
 
-## 📄 License
+## License
 
 MIT — free to use and modify.
